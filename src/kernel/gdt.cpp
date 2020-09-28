@@ -1,5 +1,7 @@
 #include "../include/gdt.h"
 
+void printf(char* str);
+
 GlobalDescriptorTable::GlobalDescriptorTable() : nullSegmentSelector(0, 0, 0),
     unusedSegmentSelector(0, 0, 0),
     codeSegmentSelector(0, 64*1024*1024, 0x9a),
@@ -10,6 +12,7 @@ GlobalDescriptorTable::GlobalDescriptorTable() : nullSegmentSelector(0, 0, 0),
     i[0] = sizeof(GlobalDescriptorTable) << 16;
 
     asm volatile("lgdt (%0)": :"p" (((uint8_t *) i) +2));
+    printf("Successfully installed GDT");
 }
 
 GlobalDescriptorTable::~GlobalDescriptorTable()

@@ -7,14 +7,14 @@ TOOLCHAIN_PREFIX := tools/$(TOOLCHAIN_DIR)/bin/
 AS = $(TOOLCHAIN_PREFIX)$(HOST)-as
 CPP = $(TOOLCHAIN_PREFIX)$(HOST)-g++
 
-GPPARMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
+GPPARMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -std=c++14
 ASPARAMS = --32
 
 #TODO: Update LD params
 LDPARAMS = -melf_i386
 
 
-objlist = src/arch/x86/boot.o src/kernel/kernel.o src/kernel/gdt.o src/kernel/port.o src/kernel/interruptstubs.o src/kernel/interrupts.o
+objlist = src/arch/x86/boot.o src/kernel/kernel.o src/kernel/gdt.o src/kernel/port.o src/kernel/interruptstubs.o src/kernel/interrupts.o src/kernel/terminal.o
 
 %.o : %.cpp
 	$(CPP) $(GPPARMS) -o $@ -c $<
